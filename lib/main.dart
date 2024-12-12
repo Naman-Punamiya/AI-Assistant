@@ -26,10 +26,9 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
             elevation: 1,
             centerTitle: true,
-            backgroundColor: Colors.white,
-            iconTheme: IconThemeData(color: Colors.blue),
-            titleTextStyle: TextStyle(
-                color: Colors.blue, fontSize: 20, fontWeight: FontWeight.w500)),
+            // backgroundColor: Colors.white,
+            // iconTheme: IconThemeData(color: Colors.blue),
+            titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
       ),
       darkTheme: ThemeData(
         useMaterial3: false,
@@ -37,16 +36,26 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
             elevation: 1,
             centerTitle: true,
-            backgroundColor: Colors.white,
-            iconTheme: IconThemeData(color: Colors.blue),
-            titleTextStyle: TextStyle(
-                color: Colors.blue, fontSize: 20, fontWeight: FontWeight.w500)),
+            titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
       ),
-      themeMode: ThemeMode.dark,
+      themeMode: Pref.defaultTheme,
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
     );
   }
 }
 
-// extention 
+extension AppTheme on ThemeData {
+  Color get onBoardBg => brightness == Brightness.dark
+      ? Colors.grey.shade700
+      : Colors.amber.shade200;
+
+  Color get onButtonBg => brightness == Brightness.dark
+      ? Colors.cyan.shade800
+      : Colors.blue;
+
+  Color get textColor => brightness == Brightness.dark
+      ? Colors.white70
+      : Colors.black54;
+
+}

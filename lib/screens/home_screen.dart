@@ -1,7 +1,9 @@
 import 'package:ai_app/global.dart';
 import 'package:ai_app/models/home_type.dart';
+import 'package:ai_app/models/pref.dart';
 import 'package:ai_app/widgets/home_card.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,27 +13,31 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  final _isDarkMode = Get.isDarkMode.obs;
+
   @override
   Widget build(BuildContext context) {
-
     // apis.getAnswer("Hii");
 
     return Scaffold(
       appBar: AppBar(
-        elevation: 1,
-        centerTitle: true,
         title: const Text(
           "AI Assistant",
-          style: TextStyle(
-              color: Colors.blue, fontSize: 20, fontWeight: FontWeight.w500),
+          style: TextStyle(),
         ),
         actions: [
           IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.brightness_4_rounded,
-                color: Colors.black,
-                size: 20,
+              onPressed: () {
+                Get.changeThemeMode(
+                    _isDarkMode.value ? ThemeMode.light : ThemeMode.dark);
+                    _isDarkMode.value = !_isDarkMode.value;
+                    Pref.isDarkMode = !_isDarkMode.value;
+              },
+              icon: Obx( () => Icon(_isDarkMode.value ? Icons.brightness_2_rounded :
+                  Icons.brightness_5_rounded,
+                  size: 26,
+                ),
               ))
         ],
       ),

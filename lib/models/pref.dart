@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -12,4 +13,16 @@ class Pref{
 
   static bool get showOnboarding => _box.get('showOnboarding', defaultValue: true);
   static set showOnboarding(bool v) => _box.put('showOnboarding', v);
+
+
+  static bool get isDarkMode => _box.get('isDarkMode') ?? false;
+  static set isDarkMode(bool v) => _box.put('isDarkMode', v);
+
+  static ThemeMode get defaultTheme{
+    final data = _box.get('isDarkMode');
+    print(data);
+    if(data == null) return ThemeMode.system;
+    if(data == true) return ThemeMode.dark;
+    return ThemeMode.light;
+  }
 }

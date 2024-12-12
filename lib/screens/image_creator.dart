@@ -2,6 +2,7 @@
 // import 'dart:typed_data';
 import 'package:ai_app/controller/image_controller.dart';
 import 'package:ai_app/global.dart';
+import 'package:ai_app/main.dart';
 import 'package:ai_app/models/my_dialog.dart';
 import 'package:ai_app/widgets/custom_loading.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +63,7 @@ class _ImageCreatorState extends State<ImageCreator> {
           ? Padding(
               padding: const EdgeInsets.only(right: 6, bottom: 6),
               child: FloatingActionButton(
-                onPressed: (){
+                onPressed: () {
                   // if (_c.status.value == Status.complete &&
                   //     _c.generatedImage.value != null) {
                   //   await saveImageToGallery(_c.generatedImage.value!);
@@ -110,7 +111,7 @@ class _ImageCreatorState extends State<ImageCreator> {
           Align(
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Theme.of(context).onButtonBg,
                     foregroundColor: Colors.white,
                     shape: const StadiumBorder(),
                     elevation: 0,
@@ -131,7 +132,9 @@ class _ImageCreatorState extends State<ImageCreator> {
     if (_c.status.value == Status.loading) {
       return const CustomLoading();
     } else if (_c.status.value == Status.none) {
-      return Lottie.asset("images/TextToImage.json");
+      return Container(
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.white30,),
+          child: Lottie.asset("images/TextToImage.json"));
     } else if (_c.status.value == Status.complete) {
       MyDialog.success('Image Created Successfully');
       return ClipRRect(

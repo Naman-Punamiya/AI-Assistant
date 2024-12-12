@@ -1,4 +1,5 @@
 import 'package:ai_app/global.dart';
+import 'package:ai_app/main.dart';
 import 'package:ai_app/models/onboard.dart';
 import 'package:ai_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class OnboardingScreen extends StatelessWidget {
         itemCount: list.length,
         itemBuilder: (context, index) {
           return Container(
-            color: Colors.amber.shade200,
+            color: Theme.of(context).onBoardBg,
             child: Column(
               children: [
                 Lottie.asset('images/${list[index].lottie}.json',
@@ -53,7 +54,6 @@ class OnboardingScreen extends StatelessWidget {
                     list[index].subtitle,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                        color: Colors.black54,
                         fontSize: 13.5,
                         letterSpacing: 1.5),
                   ),
@@ -83,7 +83,7 @@ class OnboardingScreen extends StatelessWidget {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Theme.of(context).onButtonBg,
                     foregroundColor: Colors.white,
                       shape: const StadiumBorder(),
                       elevation: 0,
