@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:ai_app/global.dart';
 import 'package:ai_app/models/my_dialog.dart';
@@ -35,6 +36,20 @@ class apis {
       MyDialog.error('Something went wrong. Try again Later');
       print(e.toString());
       return 'Something went wrong. Try again Later';
+    }
+  }
+
+  static Future<List<String>> searchAIImages(String prompt) async {
+    try {
+      final res =
+          await get(Uri.parse('https://lexica.art/api/v1/search?q=$prompt'));
+
+      final data = jsonDecode(res.body);
+
+      return List.from(data['images']).map((e) => e['src'].toString()).toList();
+    } catch (e) {
+      log(e.toString());
+      return [];
     }
   }
 }

@@ -120,7 +120,8 @@ class _ImageCreatorState extends State<ImageCreator> {
                       fontWeight: FontWeight.w500,
                     ),
                     minimumSize: Size(mq.width * .4, 50)),
-                onPressed: () => _c.createAIImage(_c.textC.text),
+                onPressed: () => _c.searchAIImage(),
+                // _c.createAIImage(_c.textC.text),
                 child: const Text("Create")),
           )
         ],
@@ -128,23 +129,47 @@ class _ImageCreatorState extends State<ImageCreator> {
     );
   }
 
+  // Widget _aiImage() {
+  //   if (_c.status.value == Status.loading) {
+  //     return const CustomLoading();
+  //   } else if (_c.status.value == Status.none) {
+  //     return Container(
+  //         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.white30,),
+  //         child: Lottie.asset("images/TextToImage.json"));
+  //   } else if (_c.status.value == Status.complete) {
+  //     MyDialog.success('Image Created Successfully');
+  //     return ClipRRect(
+  //       borderRadius: BorderRadius.circular(10),
+  //       child: Image.memory(_c.generatedImage.value!),
+  //     );
+  //   } else {
+  //     MyDialog.error('Something went wrong!!!');
+  //     return Container();
+  //   }
+  // }
+
   Widget _aiImage() {
     if (_c.status.value == Status.loading) {
       return const CustomLoading();
+
     } else if (_c.status.value == Status.none) {
       return Container(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.white30,),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20), color: Colors.white30),
           child: Lottie.asset("images/TextToImage.json"));
+    
     } else if (_c.status.value == Status.complete) {
-      MyDialog.success('Image Created Successfully');
+      // MyDialog.success('Image Created Successfully');
       return ClipRRect(
         borderRadius: BorderRadius.circular(10),
-        child: Image.memory(_c.generatedImage.value!),
+        child: Image.network(_c.url.value), // Display the image from URL
       );
+    
     } else {
       MyDialog.error('Something went wrong!!!');
       return Container();
     }
+  
   }
 }
   // ClipRRect(

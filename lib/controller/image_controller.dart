@@ -36,6 +36,7 @@
 // }
 
 import 'dart:typed_data';
+import 'package:ai_app/apis/apis.dart';
 import 'package:ai_app/global.dart';
 import 'package:ai_app/models/my_dialog.dart';
 import 'package:flutter/material.dart';
@@ -45,10 +46,13 @@ import 'package:stability_image_generation/stability_image_generation.dart';
 class ImageController extends GetxController {
   var textC = TextEditingController();
   final StabilityAI _ai = StabilityAI();
-  var status = Status.none.obs; // Reactive status to manage loading states
+  var status = Status.none.obs;
   var generatedImage =
       Rx<Uint8List?>(null); // Reactive variable for the image data
-  var errorMessage = RxString('');
+
+  final url = ''.obs;
+
+  final imageList = <String>[].obs;
 
   Future<void> createAIImage(String prompt) async {
     if (textC.text.isNotEmpty) {
@@ -70,6 +74,26 @@ class ImageController extends GetxController {
       MyDialog.info('Provide Some Description');
     }
   }
+
+  Future<void> searchAIImage() async {
+    if(textC.text.trim().isNotEmpty){
+      status.value = Status.loading;
+      imageList.value = await apis.searchAIImages(textC.text);
+    
+      if(imageList.isEmpty){
+        MyDialog.error('Something went wrong. Try again later');
+        return;
+      }
+
+      url.value = imageList.first;
+
+      status.value = Status.complete;
+    }else{
+      MyDialog.info('Provide Some Description');
+      status.value = Status.none;
+    }
+  }
+
 }
 
 enum Status { none, loading, complete, error }
