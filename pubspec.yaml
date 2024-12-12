@@ -48,6 +48,7 @@ dependencies:
   dart_openai: ^5.1.0
   cached_network_image: ^3.4.1
   stability_image_generation: ^0.0.4
+  appwrite: ^13.0.0
   # image_gallery_saver: ^1.7.0
   # gallery_saver_updated: ^3.0.0
   # permission_handler: ^10.2.0
