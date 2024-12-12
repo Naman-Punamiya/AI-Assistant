@@ -105,8 +105,35 @@ class _ImageCreatorState extends State<ImageCreator> {
           ),
           Container(
             height: mq.height * .5,
+            margin: EdgeInsets.symmetric(vertical: mq.height * .015),
             alignment: Alignment.center,
             child: Obx(() => _aiImage()),
+          ),
+          Obx(
+            () => _c.imageList.isEmpty
+                ? const SizedBox()
+                : SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.only(bottom: mq.height * .03),
+                    physics: const BouncingScrollPhysics(),
+                    child: Wrap(
+                      spacing: 10,
+                      children: _c.imageList
+                          .map((e) => InkWell(
+                                onTap: () {
+                                  _c.url.value = e;
+                                },
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image.network(
+                                    e,
+                                    height: 100,
+                                  ), // Display the image from URL
+                                ),
+                              ))
+                          .toList(),
+                    ),
+                  ),
           ),
           Align(
             child: ElevatedButton(
@@ -151,25 +178,21 @@ class _ImageCreatorState extends State<ImageCreator> {
   Widget _aiImage() {
     if (_c.status.value == Status.loading) {
       return const CustomLoading();
-
     } else if (_c.status.value == Status.none) {
       return Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20), color: Colors.white30),
           child: Lottie.asset("images/TextToImage.json"));
-    
     } else if (_c.status.value == Status.complete) {
       // MyDialog.success('Image Created Successfully');
       return ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Image.network(_c.url.value), // Display the image from URL
       );
-    
     } else {
       MyDialog.error('Something went wrong!!!');
       return Container();
     }
-  
   }
 }
   // ClipRRect(
