@@ -4,6 +4,7 @@ import 'package:ai_app/models/pref.dart';
 import 'package:ai_app/widgets/home_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,6 +14,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  BannerAd bAD = BannerAd(
+      size: AdSize.banner,
+      adUnitId: "ca-app-pub-8040256410730830/5000415973",
+      listener: BannerAdListener(onAdLoaded: (Ad ad) {
+        // print('Ads Loaded');
+      }, onAdFailedToLoad: (Ad ad, LoadAdError error) {
+        // print("Ads not Loaded");
+        ad.dispose();
+      }, onAdOpened: (Ad ad) {
+        // print("Ads Clicked");
+      }),
+      request: const AdRequest());
 
   final _isDarkMode = Get.isDarkMode.obs;
 
@@ -31,11 +44,14 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () {
                 Get.changeThemeMode(
                     _isDarkMode.value ? ThemeMode.light : ThemeMode.dark);
-                    _isDarkMode.value = !_isDarkMode.value;
-                    Pref.isDarkMode = !_isDarkMode.value;
+                _isDarkMode.value = !_isDarkMode.value;
+                Pref.isDarkMode = !_isDarkMode.value;
               },
-              icon: Obx( () => Icon(_isDarkMode.value ? Icons.brightness_2_rounded :
-                  Icons.brightness_5_rounded,
+              icon: Obx(
+                () => Icon(
+                  _isDarkMode.value
+                      ? Icons.brightness_2_rounded
+                      : Icons.brightness_5_rounded,
                   size: 26,
                 ),
               ))
@@ -49,6 +65,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   homeType: e,
                 ))
             .toList(),
+      ),
+      bottomNavigationBar: SizedBox(
+        height: 50,
+        child: AdWidget(ad: bAD..load(),key: UniqueKey(),),
       ),
     );
   }

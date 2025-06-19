@@ -56,10 +56,7 @@ class _ChatBotState extends State<ChatBot> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Image.asset(
-            "images/Logo.png",
-            width: 250,
-          ),
+          title: Text("Chat Bot",style: TextStyle(fontSize: 30,color: Colors.white,fontWeight: FontWeight.bold),)
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Padding(

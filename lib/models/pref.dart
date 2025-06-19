@@ -20,7 +20,7 @@ class Pref{
 
   static ThemeMode get defaultTheme{
     final data = _box.get('isDarkMode');
-    print(data);
+    // print(data);
     if(data == null) return ThemeMode.system;
     if(data == true) return ThemeMode.dark;
     return ThemeMode.light;
