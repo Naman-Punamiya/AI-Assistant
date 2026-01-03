@@ -45,11 +45,11 @@ dependencies:
   flutter_animate: ^4.5.2
   http: ^1.2.2
   animated_text_kit: ^4.2.2
-  dart_openai: ^5.1.0
+  dart_openai: ^6.1.1
   cached_network_image: ^3.4.1
-  stability_image_generation: ^0.0.4
-  appwrite: ^13.0.0
-  google_mobile_ads: ^5.2.0
+  stability_image_generation: ^1.0.0
+  appwrite: ^20.3.2
+  google_mobile_ads: ^6.0.0
   # image_gallery_saver: ^1.7.0
   # gallery_saver_updated: ^3.0.0
   # permission_handler: ^10.2.0
@@ -63,7 +63,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^4.0.0
+  flutter_lints: ^6.0.0
   flutter_launcher_icons: ^0.14.2
 
 # For information on the generic Dart part of this file, see the

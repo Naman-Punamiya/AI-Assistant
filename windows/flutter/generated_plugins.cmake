@@ -3,7 +3,9 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  desktop_webview_window
   isar_flutter_libs
+  speech_to_text_windows
   url_launcher_windows
   window_to_front
 )
