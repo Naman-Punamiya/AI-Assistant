@@ -1,4 +1,4 @@
-# 🤖 AI Chat Assistant (Flutter + Gemini API)
+# AI Chat Assistant
 
 An intelligent AI-powered chatbot built with **Flutter** that leverages the **Google Gemini API** to answer user queries in real time. The application features a clean and responsive interface with support for both **Light** and **Dark** themes, providing a smooth and modern user experience.
 
